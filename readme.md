@@ -97,7 +97,7 @@ Go to the tests directory:
 cd tests
 ```
 
-Build the default target (first target in the `builder` file):
+Build the default target (first target in the `builder` file) by running:
 ```
 scb
 ```
