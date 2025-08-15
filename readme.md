@@ -44,7 +44,7 @@ SRC_MAIN = main.c
 SRC_FOO = foo.c
 OBJ_MAIN = main.o
 OBJ_FOO = foo.o
-BIN = main
+TARGET = main
 
 ```
 
@@ -60,13 +60,13 @@ $(CC) $(CFLAGS) -c $(SRC_MAIN) -o $(OBJ_MAIN)
 Define a target followed by dependencies separated by spaces:
 
 ```
-$(BIN): $(OBJ_MAIN) $(OBJ_FOO)
+$(TARGET): $(OBJ_MAIN) $(OBJ_FOO)
 ```
 
 Commands to build the target can be indented (with a tab or space) on lines immediately after the target line:
 
 ```
-    $(CC) $(CFLAGS) $(OBJ_MAIN) $(OBJ_FOO) -o $(BIN)
+    $(CC) $(CFLAGS) $(OBJ_MAIN) $(OBJ_FOO) -o $(TARGET)
 ```
 
 
@@ -87,7 +87,7 @@ Define a `clean` target to delete generated files using variables:
 
 ```
 clean:
-rm -f $(BIN) $(OBJ_MAIN) $(OBJ_FOO) $(OBJ_BAR)
+rm -f $(TARGET) $(OBJ_MAIN) $(OBJ_FOO) $(OBJ_BAR)
 ```
 
 
