@@ -63,7 +63,7 @@ Define a target followed by dependencies separated by spaces:
 $(BIN): $(OBJ_MAIN) $(OBJ_FOO)
 ```
 
-Commands to build the target must be indented (with a tab or space) on lines immediately after the target line:
+Commands to build the target can be indented (with a tab or space) on lines immediately after the target line:
 
 ```
     $(CC) $(CFLAGS) $(OBJ_MAIN) $(OBJ_FOO) -o $(BIN)
