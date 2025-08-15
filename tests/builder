@@ -1,10 +1,21 @@
 CC = gcc
 CFLAGS = -Wall -g
-hello: main.o hello.o
-    $(CC) $(CFLAGS) main.o hello.o -o hello
-main.o: main.c hello.h
-    $(CC) $(CFLAGS) -c main.c -o main.o
-hello.o: hello.c hello.h
-    $(CC) $(CFLAGS) -c hello.c -o hello.o
+
+TARGET = hello
+OBJ_MAIN = main.o
+OBJ_HELLO = hello.o
+SRC_MAIN = main.c
+SRC_HELLO = hello.c
+HDR_HELLO = hello.h
+
+$(TARGET): $(OBJ_MAIN) $(OBJ_HELLO)
+    $(CC) $(CFLAGS) $(OBJ_MAIN) $(OBJ_HELLO) -o $(TARGET)
+
+$(OBJ_MAIN): $(SRC_MAIN) $(HDR_HELLO)
+    $(CC) $(CFLAGS) -c $(SRC_MAIN) -o $(OBJ_MAIN)
+
+$(OBJ_HELLO): $(SRC_HELLO) $(HDR_HELLO)
+    $(CC) $(CFLAGS) -c $(SRC_HELLO) -o $(OBJ_HELLO)
+
 clean:
-    rm -f hello main.o hello.o
+    rm -f $(TARGET) $(OBJ_MAIN) $(OBJ_HELLO)

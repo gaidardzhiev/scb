@@ -31,51 +31,69 @@ The first target in the build file is built by default. You can specify a target
 
 ## Supported Build File Syntax (`builder`)
 
-The build file uses this simple syntax:
+The build file uses a simple syntax that supports variables, targets with dependencies, commands, and comments.
 
 ### Variables
 
-Assign variables like this (no export needed):
+Define variables to store values like compiler, flags, or file names. No special export needed:
 
 ```
 CC = musl-gcc
 CFLAGS = -Wall -g
+SRC_MAIN = main.c
+SRC_FOO = foo.c
+OBJ_MAIN = main.o
+OBJ_FOO = foo.o
+BIN = main
+
 ```
 
-Use variables in commands with `$(VAR)`:
+Use variables in command lines or dependencies with `$(VAR)` syntax. For example:
 
 ```
-$(CC) $(CFLAGS) -c main.c -o main.o
+$(CC) $(CFLAGS) -c $(SRC_MAIN) -o $(OBJ_MAIN)
 ```
 
 
 ### Targets and Dependencies
 
-Define a target and its dependencies (files or other targets):
+Define a target followed by dependencies separated by spaces:
 
 ```
-main: main.o lib.o
+$(BIN): $(OBJ_MAIN) $(OBJ_FOO)
 ```
 
-Commands to build the target are indented on the next lines:
+Commands to build the target must be indented (with a tab or space) on lines immediately after the target line:
 
 ```
-$(CC) $(CFLAGS) -o myapp main.o utils.o
+    $(CC) $(CFLAGS) $(OBJ_MAIN) $(OBJ_FOO) -o $(BIN)
 ```
 
-### Multiple commands per target are allowed:
+
+### Multiple commands per target
+
+Specify more than one command as multiple indented lines:
 
 ```
-main: dep1 dep2 dep3
-echo "building target"
-gcc -c dep1
-gcc -c dep2
-gcc -c dep3
+$(OBJ_MAIN): $(SRC_MAIN)
+printf "compiling sourcecode\n"
+$(CC) $(CFLAGS) -c $(SRC_MAIN) -o $(OBJ_MAIN)
 ```
+
+
+### Clean target example
+
+Define a `clean` target to delete generated files using variables:
+
+```
+clean:
+rm -f $(BIN) $(OBJ_MAIN) $(OBJ_FOO) $(OBJ_BAR)
+```
+
 
 ### Comments
 
-Start lines with `#`
+Lines starting with `#` are comments ignored by the build system
 
 ---
 
@@ -127,16 +145,26 @@ Hello, build system!
 ## Example `builder` File for a Hello World C program
 
 ```
-CC = gcc
+CC = musl-gcc
 CFLAGS = -Wall -g
-hello: main.o hello.o
-    $(CC) $(CFLAGS) main.o hello.o -o hello
-main.o: main.c hello.h
-    $(CC) $(CFLAGS) -c main.c -o main.o
-hello.o: hello.c hello.h
-    $(CC) $(CFLAGS) -c hello.c -o hello.o
+TARGET = hello
+OBJ_MAIN = main.o
+OBJ_HELLO = hello.o
+SRC_MAIN = main.c
+SRC_HELLO = hello.c
+HDR_HELLO = hello.h
+
+$(TARGET): $(OBJ_MAIN) $(OBJ_HELLO)
+    $(CC) $(CFLAGS) $(OBJ_MAIN) $(OBJ_HELLO) -o $(TARGET)
+
+$(OBJ_MAIN): $(SRC_MAIN) $(HDR_HELLO)
+    $(CC) $(CFLAGS) -c $(SRC_MAIN) -o $(OBJ_MAIN)
+
+$(OBJ_HELLO): $(SRC_HELLO) $(HDR_HELLO)
+    $(CC) $(CFLAGS) -c $(SRC_HELLO) -o $(OBJ_HELLO)
+
 clean:
-    rm -f hello main.o hello.o
+    rm -f $(TARGET) $(OBJ_MAIN) $(OBJ_HELLO)
 ```
 
 ---
