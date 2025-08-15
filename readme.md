@@ -31,7 +31,7 @@ The first target in the build file is built by default. You can specify a target
 
 ## Supported Build File Syntax (`builder`)
 
-Your build file uses this simple syntax:
+The build file uses this simple syntax:
 
 ### Variables
 
@@ -41,7 +41,6 @@ Assign variables like this (no export needed):
 CC = musl-gcc
 CFLAGS = -Wall -g
 ```
-
 
 Use variables in commands with `$(VAR)`:
 
