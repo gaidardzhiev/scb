@@ -112,18 +112,6 @@ R *find_rule(const char *target) {
 
 int execute_rule(R *r);
 
-/*int build_target(const char *target) {
-	R *r = find_rule(target);
-	if (!r)
-		return 0;
-	for (int i = 0; i < r->dep_count; i++) {
-		int res = build_target(r->deps[i]);
-		if (res != 0)
-			return res;
-	}
-	return execute_rule(r);
-}*/
-
 int build_target(const char *target) {
 	R *r = find_rule(target);
 	if(!r) return 0;
