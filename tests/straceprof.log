@@ -1,0 +1,26 @@
+13108 1755763886.323205 execve("./scb", ["./scb"], 0xffcadf04 /* 24 vars */) = 0
+13110 1755763886.361995 exit(0)         = ?
+13110 1755763886.364265 +++ exited with 0 +++
+13112 1755763886.379667 exit(0)         = ?
+13112 1755763886.381681 +++ exited with 0 +++
+13113 1755763886.391464 exit(0)         = ?
+13113 1755763886.395469 +++ exited with 0 +++
+13114 1755763886.429751 exit(0)         = ?
+13114 1755763886.432962 +++ exited with 0 +++
+13115 1755763886.455852 execve("/bin/sh", ["sh", "-c", "gcc -Wall -g -c main.c -o main.o"], 0xffeff33c /* 24 vars */) = 0
+13116 1755763886.502158 execve("/bin/sh", ["sh", "-c", "gcc -Wall -g -c hello.c -o hello.o"], 0xffeff33c /* 24 vars */) = 0
+13115 1755763887.748157 execve("/usr/sbin/gcc", ["gcc", "-Wall", "-g", "-c", "main.c", "-o", "main.o"], 0xf0f6310 /* 24 vars */) = 0
+13116 1755763887.773387 execve("/usr/sbin/gcc", ["gcc", "-Wall", "-g", "-c", "hello.c", "-o", "hello.o"], 0xf0f6310 /* 24 vars */) = 0
+13115 1755763888.392330 exit_group(1)   = ?
+13115 1755763888.399721 +++ exited with 1 +++
+13108 1755763888.408605 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=13115, si_uid=10196, si_status=1, si_utime=0, si_stime=3 /* 0.03 s */} ---
+13116 1755763888.413727 exit_group(1)   = ?
+13116 1755763888.419938 +++ exited with 1 +++
+13108 1755763888.425387 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=13116, si_uid=10196, si_status=1, si_utime=0, si_stime=5 /* 0.05 s */} ---
+13109 1755763888.454292 exit(0)         = ?
+13109 1755763888.460499 +++ exited with 0 +++
+13111 1755763888.467969 exit(0 <unfinished ...>
+13108 1755763888.469880 exit_group(256 <unfinished ...>
+13111 1755763888.472597 +++ exited with 0 +++
+13108 1755763888.473864 <... exit_group resumed>) = ?
+13108 1755763888.477130 +++ exited with 0 +++
