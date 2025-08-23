@@ -20,12 +20,9 @@ typedef struct {
 typedef struct {
 	const char *target;
 	int result;
-} BuildArg;
+} X;
 
-V vars[128];
-int var_count = 0;
-R rules[256];
-int rule_count = 0;
+V vars[128]; int var_count = 0; R rules[256]; int rule_count = 0;
 
 char *trim(char *s) {
 	char *e;
@@ -121,7 +118,7 @@ R *find_rule(const char *target) {
 int build_target(const char *target);
 
 void *build_thread(void *arg) {
-	BuildArg *ba = (BuildArg *)arg;
+	X *ba = (X *)arg;
 	ba->result = build_target(ba->target);
 	return NULL;
 }
@@ -158,7 +155,7 @@ int build_target(const char *target) {
 		return execute_rule(r);
 	}
 	pthread_t threads[32];
-	BuildArg args[32];
+	X args[32];
 	for(int i=0; i < r->dep_count; i++) {
 		args[i].target = r->deps[i];
 		args[i].result = 0;
