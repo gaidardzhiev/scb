@@ -11,7 +11,7 @@ clean:
 
 install:
 	cp $(BIN) /usr/bin/$(BIN)
-#	cp $(BIN).1 /usr/share/man/man1/
+	cp $(BIN).1 /usr/share/man/man1/
 
 parallel:
 	$(CC) -o parallel_scb parallel_scb.c -static
