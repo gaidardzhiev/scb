@@ -25,7 +25,7 @@ The system recursively builds dependencies first, then runs the commands for a t
 It substitutes variables in commands before running them via `system()` calls.
 
 - **Special Targets:**  
-The first target in the build file is built by default. You can specify a target on the command line (e.g., `./build clean`) to run specific targets like cleaning.
+The first target in the build file is built by default. You can specify a target on the command line (e.g., `./scb clean`) to run specific targets like cleaning.
 
 ---
 
