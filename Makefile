@@ -6,15 +6,9 @@ all: $(BIN)
 $(BIN): %: %.c
 	$(CC) -o $@ $< -static
 
-clean:
-	rm $(BIN) parallel_scb
-
-install:
-	cp $(BIN) /usr/bin/$(BIN)
-	cp $(BIN).1 /usr/share/man/man1/
-
 parallel:
 	$(CC) -o parallel_scb parallel_scb.c -static
+
 strip:
 	strip -S \
 		--strip-unneeded \
@@ -23,3 +17,10 @@ strip:
 		--remove-section=.note \
 		--remove-section=.note.gnu.build-id \
 		--remove-section=.note.ABI-tag $(BIN)
+
+install:
+	cp $(BIN) /usr/bin/$(BIN)
+	cp $(BIN).1 /usr/share/man/man1/
+
+clean:
+	rm $(BIN) parallel_scb
